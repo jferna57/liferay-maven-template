@@ -1,15 +1,46 @@
 <?xml version="1.0"?>
 
-<f:view
-	xmlns="http://www.w3.org/1999/xhtml"
+<f:view xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
->
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 	<h:head />
 	<h:body>
 		<h:outputText value="#{i18n['primeFaces-hello-world']}" />
+		
+		<h:form>
+
+			<p:growl id="msg" />
+
+			<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+				
+				<h:outputText value="#{i18n['accept-terms-and-conditions']}" />
+				<p:selectBooleanButton value="#{formBean.value1}" onLabel="Yes"
+					offLabel="No" />
+
+				<h:outputText value="#{i18n['subscribe-me-to-newsletter']}" />
+				<p:selectBooleanButton value="#{formBean.value2}" onLabel="Yes"
+					offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close">
+					<p:ajax update="msg" listener="#{formBean.addMessage}" />
+				</p:selectBooleanButton>
+
+			</h:panelGrid>
+
+			<p:commandButton value="Submit" update="display"
+				oncomplete="PF('dlg').show()" />
+
+			<p:dialog header="Selected Values" modal="true" showEffect="fade"
+				hideEffect="fade" widgetVar="dlg">
+				<h:panelGrid columns="1" id="display">
+					<h:outputText value="Value 1: #{formBean.value1}" />
+
+					<h:outputText value="Value 2: #{formBean.value2}" />
+				</h:panelGrid>
+			</p:dialog>
+
+		</h:form>
+
 	</h:body>
 </f:view>

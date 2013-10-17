@@ -55,5 +55,6 @@
 	</dependencies>
 	<modules>
 		<module>portlet-primefaces-template</module>
+		<module>theme-template</module>
 	</modules>
 </project>
