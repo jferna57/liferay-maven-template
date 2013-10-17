@@ -1,0 +1,2 @@
+liferay-maven-template
+======================
